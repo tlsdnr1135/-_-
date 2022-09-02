@@ -5,12 +5,20 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
+env:
+  PROJECT_NAME: chatWeb
+  S3_BUCKET_NAME: wook-bucket
+  CODE_DEPLOY_APP_NAME: CodeDeploy-cicd
+  DEPLOYMENT_GROUP_NAME: CodeDeploy-deploygroup
 
 jobs:
   ci:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - uses: actions/checkout@v3
@@ -19,8 +27,18 @@ jobs:
       with:
         java-version: '11'
 
+    - name: application.properties 생성
+        # branch가 main일 때
+      if: true
+      run: |
+          # spring의 resources 경로로 이동
+          cd ./src/main/resources
+          touch ./application.properties
+          # GitHub-Actions에서 설정한 값을 application.properties 파일에 쓰기
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./application.properties
+
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x ./gradlew
 
       # Build
     - name: Build with Gradle
@@ -40,12 +58,14 @@ jobs:
 
       # S3 Bucket으로 copy
     - name: Deliver to AWS S3
-      env:
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-	aws-region: ap-northeast-2
-      run:|
-        aws s3 cp \
-        --region ap-northeast-2 \
-        --acl private \ 
-	./springboot-intro-build.zip s3://springboot-intro-build/
+	      #aws-region: ap-northeast-2
+
+    - name: S3 업로드
+      run: aws s3 cp --region ap-northeast-2 ./$PROJECT_NAME.zip s3://$S3_BUCKET_NAME
+
+    - name: 코드 배치하기
+      run: aws deploy create-deployment --application-name $CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOYMENT_GROUP_NAME --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME.zip 
