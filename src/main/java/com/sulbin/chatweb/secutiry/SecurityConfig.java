@@ -43,7 +43,7 @@ public class SecurityConfig{
         httpSecurity.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/account/sign-up").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/login","/api/home").permitAll()
                 .anyRequest()
                 .authenticated();
         httpSecurity.headers().frameOptions().sameOrigin();
