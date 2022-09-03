@@ -1,4 +1,4 @@
-REPOSITORY=/home/ubuntu/test
+REPOSITORY=/home/ubuntu
 cd $REPOSITORY
 
 APP_NAME=chatWeb #1
