@@ -43,7 +43,8 @@ public class SecurityConfig{
         httpSecurity.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/account/sign-up").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/login","/api/home").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/login").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/account/home").permitAll()
                 .anyRequest()
                 .authenticated();
         httpSecurity.headers().frameOptions().sameOrigin();
@@ -51,28 +52,29 @@ public class SecurityConfig{
         httpSecurity.authenticationProvider(customAuthenticationProvider);
         httpSecurity.userDetailsService(userDeatilsService);
         httpSecurity.httpBasic().disable();
-        httpSecurity.formLogin()
-                .usernameParameter("name")
-                .loginProcessingUrl("/api/login")
-                .successHandler(
-                        new AuthenticationSuccessHandler() {
-                            @Override
-                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                                System.out.println("authentication : " + authentication.getName());
-                                response.setStatus(200);
-                            }
-                        }
-                )
-                .failureHandler(
-                        new AuthenticationFailureHandler() {
-                            @Override
-                            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                                System.out.println("exception : " + exception.getMessage());
-                                System.out.println("패일 핸들러");
-                                response.sendRedirect("/login");
-                            }
-                        }
-                );
+        httpSecurity.formLogin().disable();
+//        httpSecurity.formLogin()
+//                .usernameParameter("name")
+//                .loginProcessingUrl("/api/login")
+//                .successHandler(
+//                        new AuthenticationSuccessHandler() {
+//                            @Override
+//                            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+//                                System.out.println("authentication : " + authentication.getName());
+//                                response.setStatus(200);
+//                            }
+//                        }
+//                )
+//                .failureHandler(
+//                        new AuthenticationFailureHandler() {
+//                            @Override
+//                            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+//                                System.out.println("exception : " + exception.getMessage());
+//                                System.out.println("패일 핸들러");
+//                                response.sendRedirect("/login");
+//                            }
+//                        }
+//                );
         return httpSecurity.build();
     }
 
