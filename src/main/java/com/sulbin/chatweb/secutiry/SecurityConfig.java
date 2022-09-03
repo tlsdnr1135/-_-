@@ -45,6 +45,7 @@ public class SecurityConfig{
                 .antMatchers(HttpMethod.POST,"/api/account/sign-up").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/account/home").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/account/hometest").permitAll()
                 .anyRequest()
                 .authenticated();
         httpSecurity.headers().frameOptions().sameOrigin();
