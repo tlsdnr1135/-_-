@@ -16,7 +16,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @ApiOperation(value = "회원가입", notes = "회원가입 시키는 API")
+    @ApiOperation(value = "회원가입", notes = "회원가입 시키는 API ")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "아이디"),
             @ApiImplicitParam(name = "password", value = "비번")
