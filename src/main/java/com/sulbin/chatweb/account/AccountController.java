@@ -34,7 +34,7 @@ public class AccountController {
     //테스트 홈
     @GetMapping("/home")
     public ResponseEntity<?> home(){
-        return ResponseEntity.ok().body("Home test");
+        return ResponseEntity.ok().body("Home test-good");
     }
 
     @GetMapping("/hometest")
