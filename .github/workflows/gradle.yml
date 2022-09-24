@@ -8,9 +8,9 @@ on:
     
 env:
   PROJECT_NAME: chatWeb
-  S3_BUCKET_NAME: wook-bucket
-  CODE_DEPLOY_APP_NAME: CodeDeploy-cicd
-  DEPLOYMENT_GROUP_NAME: CodeDeploy-deploygroup
+  S3_BUCKET_NAME: shinwook-cicd
+  CODE_DEPLOY_APP_NAME: shinwook-cd
+  DEPLOYMENT_GROUP_NAME: shinwook-dg-cicd
 
 jobs:
   ci:
