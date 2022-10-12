@@ -43,6 +43,7 @@ public class SecurityConfig{
         httpSecurity.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(HttpMethod.GET,"/profile").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/account/sign-up").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/account/home").permitAll()
