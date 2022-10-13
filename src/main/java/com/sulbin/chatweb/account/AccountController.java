@@ -48,7 +48,7 @@ public class AccountController {
         return ResponseEntity.ok().body("Home test");
     }
 
-    //nginx시
+    //nginx시 -> 테스트 코드는 나중에 작성
     @GetMapping("/profile")
     public String profile() {
         List<String> profiles = Arrays.asList(environment.getActiveProfiles());
