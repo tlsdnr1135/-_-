@@ -1,4 +1,5 @@
 src/main/resources/application-gitignore.properties
+src/main/resources/application.properties
 .github/workflows/main.yml
 
 HELP.md
