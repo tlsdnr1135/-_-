@@ -27,7 +27,7 @@ echo "> JAR Name: $JAR_NAME"
 #
 #chmod +x $JAR_NAME
 
-echo "> $JAR_NAME 실행"
+echo "> $JAR_NAME 실행 "
 
 IDLE_PROFILE=$(find_idle_profile)
 
