@@ -6,7 +6,7 @@ source ${ABSDIR}/profile.sh
 
 REPOSITORY=/home/ubuntu
 cd $REPOSITORY
-cd /build/libs
+cd build/libs
 
 PROJECT_NAME=ChatWeb
 
