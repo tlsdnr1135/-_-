@@ -36,7 +36,7 @@ echo "> $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다."
 echo "> ========================== "
 echo "> nohup java -jar -Dspring.profiles.active=$IDLE_PROFILE $JAR_NAME & "
 
-nohup java -jar -Dspring.profiles.active=$IDLE_PROFILE $JAR_NAME &
+nohup java -jar -Dspring.profiles.active=$IDLE_PROFILE $JAR_NAME & /dev/null 2> /dev/null < /dev/null &
 #nohup java -jar \
 #    -Dspring.config.location=classpath:/application.properties,classpath:/application-$IDLE_PROFILE.properties \
 #    -Dspring.profiles.active=$IDLE_PROFILE \
