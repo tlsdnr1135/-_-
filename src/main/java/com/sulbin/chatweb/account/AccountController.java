@@ -52,7 +52,7 @@ public class AccountController {
     @GetMapping("/profile")
     public String profile() {
         List<String> profiles = Arrays.asList(environment.getActiveProfiles());
-        List<String> realProfiles = Arrays.asList("real", "real1", "real2");
+        List<String> realProfiles = Arrays.asList("real", "real1..1", "real2");
         String defaultProfile = profiles.isEmpty() ? "default" : profiles.get(0);
 
         return profiles.stream().filter(realProfiles::contains).findAny().orElse(defaultProfile);
