@@ -17,6 +17,9 @@ PROJECT_NAME=ChatWeb
 #echo "> 새 어플리케이션 배포"
 #JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'real.jar' | tail -n 1)
+JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
+
+nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
 
 echo "> JAR Name: $JAR_NAME"
 
